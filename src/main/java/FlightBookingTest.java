@@ -12,7 +12,7 @@ import java.util.List;
 
 public class FlightBookingTest {
 
-    WebDriver driver = new ChromeDriver();
+    WebDriver driver;
 
 
     @Test
@@ -28,16 +28,16 @@ public class FlightBookingTest {
 
         //wait for the auto complete options to appear for the origin
 
-        waitFor(2000);
+        waitFor(4000);
         List<WebElement> originOptions = driver.findElement(By.id("ui-id-1")).findElements(By.tagName("li"));
         originOptions.get(0).click();
 
-        driver.findElement(By.id("toTag")).clear();
-        driver.findElement(By.id("toTag")).sendKeys("Delhi");
+        driver.findElement(By.id("ToTag")).clear();		//modified the xpath as xpath is case-sensitive
+        driver.findElement(By.id("ToTag")).sendKeys("Delhi");
 
         //wait for the auto complete options to appear for the destination
 
-        waitFor(2000);
+        waitFor(4000);
         //select the first item from the destination auto complete list
         List<WebElement> destinationOptions = driver.findElement(By.id("ui-id-2")).findElements(By.tagName("li"));
         destinationOptions.get(0).click();
@@ -78,12 +78,15 @@ public class FlightBookingTest {
     private void setDriverPath() {
         if (PlatformUtil.isMac()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
+            driver = new ChromeDriver();
         }
         if (PlatformUtil.isWindows()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+            driver = new ChromeDriver();
         }
         if (PlatformUtil.isLinux()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
+            driver = new ChromeDriver();
         }
     }
 }
