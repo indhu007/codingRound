@@ -28,15 +28,15 @@ public class HotelBookingTest {
     	
         try {
 			setDriverPath();
-			HotelBookingTest HBT = PageFactory.initElements(driver, HotelBookingTest.class);
+			HotelBookingTest HotelBooking = PageFactory.initElements(driver, HotelBookingTest.class);  // Initialized the page factory element
 
 			driver.get("https://www.cleartrip.com/");
-			HBT.hotelLink.click();
+			HotelBooking.hotelLink.click();
 
-			HBT.localityTextBox.sendKeys("Indiranagar, Bangalore");
+			HotelBooking.localityTextBox.sendKeys("Indiranagar, Bangalore");
 
-			new Select(HBT.travellerSelection).selectByVisibleText("1 room, 2 adults");
-			HBT.searchButton.click();
+			new Select(HotelBooking.travellerSelection).selectByVisibleText("1 room, 2 adults");
+			HotelBooking.searchButton.click();
 
 			driver.quit();
 		} catch (Exception e) {

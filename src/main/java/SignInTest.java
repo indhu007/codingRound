@@ -13,20 +13,25 @@ public class SignInTest {
     public void shouldThrowAnErrorIfSignInDetailsAreMissing() {
     	
 
-        setDriverPath();
+        try {
+			setDriverPath();
 
-        driver.get("https://www.cleartrip.com/");
-        waitFor(2000);
+			driver.get("https://www.cleartrip.com/");
+			waitFor(2000);
 
-        driver.findElement(By.linkText("Your trips")).click();
-        driver.findElement(By.id("SignIn")).click();
-        driver.switchTo().frame("modal_window");
-        
-        driver.findElement(By.id("signInButton")).click();
+			driver.findElement(By.linkText("Your trips")).click();
+			driver.findElement(By.id("SignIn")).click();
+			driver.switchTo().frame("modal_window"); //Switch to the IFrame of modal window
+			
+			driver.findElement(By.id("signInButton")).click();
 
-        String errors1 = driver.findElement(By.id("errors1")).getText();
-        Assert.assertTrue(errors1.contains("There were errors in your submission"));
-        driver.quit();
+			String errors1 = driver.findElement(By.id("errors1")).getText();
+			Assert.assertTrue(errors1.contains("There were errors in your submission"));
+			driver.quit();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 
     private void waitFor(int durationInMilliSeconds) {
