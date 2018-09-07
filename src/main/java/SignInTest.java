@@ -1,3 +1,5 @@
+//package com.testVagrant;
+
 import com.sun.javafx.PlatformUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -7,10 +9,11 @@ import org.testng.annotations.Test;
 
 public class SignInTest {
 
-    WebDriver driver = new ChromeDriver();
+    WebDriver driver;
 
     @Test
     public void shouldThrowAnErrorIfSignInDetailsAreMissing() {
+    	//WebDriver driver = new ChromeDriver();
 
         setDriverPath();
 
@@ -40,7 +43,8 @@ public class SignInTest {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
         }
         if (PlatformUtil.isWindows()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
+            System.setProperty("webdriver.chrome.driver", "C:\\Users\\Indhu\\git\\codingRound\\chromedriver.exe");
+            driver = new ChromeDriver();
         }
         if (PlatformUtil.isLinux()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
