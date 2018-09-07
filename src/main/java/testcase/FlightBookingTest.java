@@ -1,4 +1,7 @@
+package testcase;
+
 import com.sun.javafx.PlatformUtil;
+import core.framework;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -10,18 +13,17 @@ import org.testng.annotations.Test;
 
 import java.util.List;
 
-public class FlightBookingTest {
-
-    WebDriver driver;
+public class FlightBookingTest extends framework {
 
 
     @Test
     public void testThatResultsAppearForAOneWayJourney() {
 
         try {
-			setDriverPath();
+
 			driver.get("https://www.cleartrip.com/");
 			waitFor(2000);
+			driver.switchTo().alert().accept();
 			driver.findElement(By.id("OneWay")).click();
 
 			driver.findElement(By.id("FromTag")).clear();
@@ -53,7 +55,6 @@ public class FlightBookingTest {
 			Assert.assertTrue(isElementPresent(By.className("searchSummary")));
 
 			//close the browser
-			driver.quit();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -61,37 +62,4 @@ public class FlightBookingTest {
 
     }
 
-
-    private void waitFor(int durationInMilliSeconds) {
-        try {
-            Thread.sleep(durationInMilliSeconds);
-        } catch (InterruptedException e) {
-            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-        }
-    }
-
-
-    private boolean isElementPresent(By by) {
-        try {
-            driver.findElement(by);
-            return true;
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-    }
-
-    private void setDriverPath() {
-        if (PlatformUtil.isMac()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver");
-            driver = new ChromeDriver();
-        }
-        if (PlatformUtil.isWindows()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver.exe");
-            driver = new ChromeDriver();
-        }
-        if (PlatformUtil.isLinux()) {
-            System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
-            driver = new ChromeDriver();
-        }
-    }
 }
