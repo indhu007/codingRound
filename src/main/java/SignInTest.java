@@ -1,5 +1,3 @@
-//package com.testVagrant;
-
 import com.sun.javafx.PlatformUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +11,7 @@ public class SignInTest {
 
     @Test
     public void shouldThrowAnErrorIfSignInDetailsAreMissing() {
-    	//WebDriver driver = new ChromeDriver();
+    	
 
         setDriverPath();
 
@@ -22,7 +20,8 @@ public class SignInTest {
 
         driver.findElement(By.linkText("Your trips")).click();
         driver.findElement(By.id("SignIn")).click();
-
+        driver.switchTo().frame("modal_window");
+        
         driver.findElement(By.id("signInButton")).click();
 
         String errors1 = driver.findElement(By.id("errors1")).getText();
@@ -41,6 +40,7 @@ public class SignInTest {
     private void setDriverPath() {
         if (PlatformUtil.isMac()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver");
+            driver = new ChromeDriver();
         }
         if (PlatformUtil.isWindows()) {
             System.setProperty("webdriver.chrome.driver", "C:\\Users\\Indhu\\git\\codingRound\\chromedriver.exe");
@@ -48,6 +48,7 @@ public class SignInTest {
         }
         if (PlatformUtil.isLinux()) {
             System.setProperty("webdriver.chrome.driver", "chromedriver_linux");
+            driver = new ChromeDriver();
         }
     }
 
